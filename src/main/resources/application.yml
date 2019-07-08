@@ -1,0 +1,15 @@
+spring:
+  redis:
+    host: 192.168.70.209
+    password: 123456
+    port: 16379
+    database: 3
+    timeout: 60s
+    jedis:
+      pool:
+        max-idle: 500
+        min-idle: 50
+        max-wait: -1s
+        max-active: -1
+server:
+    port: 8090
