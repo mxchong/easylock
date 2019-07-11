@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
- * @Description redis实现分布式锁
+ * @Description
  * @Author chenkaideng
  * @Date 2019/7/8
  **/
@@ -20,6 +20,7 @@ public class RedisDistributeLock extends DistributeAbstractLock {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    @Override
     public void lock(String key) {
         boolean isLockSuccess = locking(key);
         if (!isLockSuccess) {
@@ -27,11 +28,17 @@ public class RedisDistributeLock extends DistributeAbstractLock {
         }
     }
 
+    @Override
     public void unlock(String key) {
         boolean isUnlockSuccess = unlocking(key);
         if (!isUnlockSuccess) {
             throw new RedisDistributeLockException("unlock failed");
         }
+    }
+
+    @Override
+    public boolean isLocked(String key) {
+        return stringRedisTemplate.hasKey(buildLockKey(key));
     }
 
     private String buildLockKey(String key) {

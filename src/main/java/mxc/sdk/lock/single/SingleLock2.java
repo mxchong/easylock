@@ -1,7 +1,7 @@
 package mxc.sdk.lock.single;
 
 /**
- * @Description
+ * @Description synchronized用法2
  * @Author chenkaideng
  * @Date 2019/7/4
  **/
